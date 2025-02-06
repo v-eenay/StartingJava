@@ -25,48 +25,47 @@ public class GameLogic {
         Scanner userInput = new Scanner(System.in);
         try {
             while (true) {
-                // Display the current state of the movie title in a table format
                 printMovieTitle(randomMovieTitle, guessedLetters.toString());
 
-                // Check if the player has guessed all the letters
                 if (isFullyGuessed(randomMovieTitle, guessedLetters.toString())) {
-                    System.out.println("\nCongratulations, " + playerName + "! You guessed the movie: " + randomMovieTitle);
+                    System.out.println("\n+--------------------------------------------------+");
+                    System.out.println(
+                            "| Congratulations, " + playerName + "! You guessed the movie: " + randomMovieTitle + " |");
+                    System.out.println("+--------------------------------------------------+");
                     System.out.println("It only took you " + guesses + " guesses. Not too shabby!");
-                    return guesses; // Exit the method immediately after winning
+                    return guesses;
                 }
 
-                // Ask the player to guess a letter
                 System.out.print("\nGuess a letter: ");
                 String guessedLetter = userInput.nextLine().toLowerCase();
 
-                // Validate the input
                 if (!Utils.isValidLetter(guessedLetter)) {
                     System.out.println("That's not a valid letter. Try again, champ!");
                     continue;
                 }
 
-                // Check if the letter has already been guessed
                 if (guessedLetters.indexOf(guessedLetter) != -1) {
                     System.out.println("You've already guessed '" + guessedLetter + "'. Try something new!");
                     continue;
                 }
 
-                // Process the guess
                 if (randomMovieTitle.toLowerCase().contains(guessedLetter)) {
                     System.out.println("Nice one! '" + guessedLetter + "' is in the movie title.");
                     guessedLetters.append(guessedLetter);
                 } else {
-                    System.out.println("Oops! '" + guessedLetter + "' isn't in the movie title. Better luck next time!");
+                    System.out
+                            .println("Oops! '" + guessedLetter + "' isn't in the movie title. Better luck next time!");
                 }
 
                 guesses++;
             }
         } catch (Exception e) {
             System.out.println("An unexpected error occurred. Exiting gracefully...");
+
         } finally {
-            userInput.close(); // Ensure the scanner is closed properly
+            userInput.close();
         }
-        return guesses; // Fallback return (should never reach here)
+        return guesses;
     }
 
     private boolean isFullyGuessed(String movieTitle, String guessedLetters) {
@@ -79,15 +78,15 @@ public class GameLogic {
     }
 
     private void printMovieTitle(String movieTitle, String guessedLetters) {
-        System.out.println("+-----------------------------+");
+        System.out.println("\n+-----------------------------+");
         System.out.print("| ");
         for (char c : movieTitle.toCharArray()) {
             if (c == ' ' || !Character.isLetterOrDigit(c)) {
-                System.out.print(c); // Spaces and special characters are revealed
+                System.out.print(c);
             } else if (guessedLetters.indexOf(String.valueOf(c).toLowerCase()) != -1) {
-                System.out.print(c); // Correctly guessed letters are revealed
+                System.out.print(c);
             } else {
-                System.out.print("_"); // Unguessed letters are hidden
+                System.out.print("_");
             }
         }
         System.out.println(" |\n+-----------------------------+");

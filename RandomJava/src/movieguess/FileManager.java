@@ -1,10 +1,7 @@
 package RandomJava.src.movieguess;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class FileManager {
 
@@ -25,22 +22,24 @@ public class FileManager {
 
     public void displayMoviesInTable() {
         ArrayList<String> movies = loadMovies();
-        System.out.println("\n+-----------------------------+-----------------------------+-----------------------------+-----------------------------+");
-        System.out.println("|          Movie List          |          Movie List          |          Movie List          |          Movie List          |");
-        System.out.println("+-----------------------------+-----------------------------+-----------------------------+-----------------------------+");
-        for (int i = 0; i < movies.size(); i += 4) {
-            System.out.printf("| %-27s |", i < movies.size() ? movies.get(i) : "");
-            System.out.printf(" %-27s |", (i + 1) < movies.size() ? movies.get(i + 1) : "");
-            System.out.printf(" %-27s |", (i + 2) < movies.size() ? movies.get(i + 2) : "");
-            System.out.printf(" %-27s |\n", (i + 3) < movies.size() ? movies.get(i + 3) : "");
-            System.out.println("+-----------------------------+-----------------------------+-----------------------------+-----------------------------+");
+        System.out.println("\n+------------------------------------------------------------+");
+        System.out.println("|                         Movie List                          |");
+        System.out.println("+------------------------------------------------------------+");
+        for (int i = 0; i < movies.size(); i++) {
+            System.out.printf("| %-57s |", movies.get(i));
+            if ((i + 1) % 4 == 0 || i == movies.size() - 1) {
+                System.out.println("\n+------------------------------------------------------------+");
+            } else {
+                System.out.println();
+            }
         }
     }
+
     public void saveHighScore(String playerName, int score) {
-        try (PrintWriter writer = new PrintWriter(new File(HIGH_SCORES_FILE_PATH))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(HIGH_SCORES_FILE_PATH, true))) {
             writer.println(playerName + ": " + score + " guesses");
             System.out.println("Your score has been saved. Good job!");
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             System.out.println("Error: Unable to save high score.");
         }
     }
@@ -52,16 +51,28 @@ public class FileManager {
             return;
         }
 
-        System.out.println("\n+-----------------------------+");
-        System.out.println("|         High Scores         |");
-        System.out.println("+-----------------------------+");
+        List<String> highScores = new ArrayList<>();
         try (Scanner fileScanner = new Scanner(file)) {
             while (fileScanner.hasNextLine()) {
-                System.out.printf("| %-27s |\n", fileScanner.nextLine());
+                highScores.add(fileScanner.nextLine());
             }
-            System.out.println("+-----------------------------+");
         } catch (FileNotFoundException e) {
             System.out.println("Error: Unable to read high scores.");
         }
+
+        // Sort high scores by guesses (ascending order)
+        highScores.sort((a, b) -> {
+            int scoreA = Integer.parseInt(a.replaceAll("[^0-9]", ""));
+            int scoreB = Integer.parseInt(b.replaceAll("[^0-9]", ""));
+            return Integer.compare(scoreA, scoreB);
+        });
+
+        System.out.println("\n+---------------------------------------------+");
+        System.out.println("|                  High Scores                 |");
+        System.out.println("+---------------------------------------------+");
+        for (String score : highScores) {
+            System.out.printf("| %-40s |\n", score);
+        }
+        System.out.println("+---------------------------------------------+");
     }
 }

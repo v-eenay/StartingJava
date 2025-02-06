@@ -7,9 +7,11 @@ public class Utils {
     public static int getIntInput(Scanner scanner) {
         while (!scanner.hasNextInt()) {
             System.out.println("Invalid input. Please enter a number.");
-            scanner.next(); // Clear invalid input
+            scanner.next();
         }
-        return scanner.nextInt();
+        int input = scanner.nextInt();
+        scanner.nextLine(); // Clear the buffer
+        return input;
     }
 
     public static boolean isValidLetter(String input) {

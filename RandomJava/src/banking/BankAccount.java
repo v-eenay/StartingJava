@@ -1,4 +1,4 @@
-package banking;
+package RandomJava.src.banking;
 
 public class BankAccount {
     // Instance variables

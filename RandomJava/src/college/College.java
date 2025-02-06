@@ -1,4 +1,4 @@
-package college;
+package RandomJava.src.college;
 
 import java.util.Scanner;
 

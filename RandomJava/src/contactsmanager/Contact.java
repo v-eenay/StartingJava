@@ -1,4 +1,4 @@
-package Banking.src.contactsmanager;
+package RandomJava.src.contactsmanager;
 
 public class Contact {
     /// Attributes

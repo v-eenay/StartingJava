@@ -1,4 +1,4 @@
-package college;
+package RandomJava.src.college;
 
 public class CollegeStudent {
     // Instance variables

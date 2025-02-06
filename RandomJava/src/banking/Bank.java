@@ -1,4 +1,4 @@
-package banking; // Declares that this class belongs to the 'banking' package
+package RandomJava.src.banking; // Declares that this class belongs to the 'banking' package
 
 import java.util.Scanner; // Imports the Scanner class from java.util package to read user input
 

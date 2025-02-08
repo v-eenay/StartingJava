@@ -53,7 +53,7 @@ public abstract class BankAccount implements Serializable {
             return;
         }
         balance += amount;
-        System.out.println("Deposited $" + amount + " to the account.");
+        System.out.println("Deposited Rs. " + amount + " to the account.");
     }
 
     /**
@@ -71,6 +71,6 @@ public abstract class BankAccount implements Serializable {
     public String toString() {
         return "Account Number: " + accountNumber + "\n" +
                "Account Holder: " + accountHolderName + "\n" +
-               "Balance: $" + balance;
+               "Balance: Rs. " + balance;
     }
 }

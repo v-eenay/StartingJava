@@ -29,7 +29,7 @@ public class SavingsAccount extends BankAccount {
             return;
         }
         balance -= amount;
-        System.out.println("Withdrawn $" + amount + " from the account.");
+        System.out.println("Withdrawn Rs. " + amount + " from the account.");
     }
 
     /**

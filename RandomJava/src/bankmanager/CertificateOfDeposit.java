@@ -32,11 +32,11 @@ public class CertificateOfDeposit extends BankAccount {
             return;
         }
         balance -= amount;
-        System.out.println("Withdrawn $" + amount + " from the account.");
+        System.out.println("Withdrawn Rs. " + amount + " from the account.");
         System.out.println("Certificate of Deposit matured.");
-        System.out.println("Interest earned: $" + (balance * interestRate / 100));
+        System.out.println("Interest earned: Rs. " + (balance * interestRate / 100));
         balance += balance * interestRate / 100;
-        System.out.println("New balance after maturity: $" + balance);
+        System.out.println("New balance after maturity: Rs. " + balance);
     }
 
     /**

@@ -38,20 +38,25 @@ public class BankAccountGUI extends JFrame {
      */
     private void applyDarkTheme() {
         // Set dark colors for main container
-        getContentPane().setBackground(new Color(30, 30, 30));
+        getContentPane().setBackground(new Color(18, 18, 18));
         
         // Configure colors for various UI components
-        UIManager.put("Panel.background", new Color(40, 40, 40));     // Panel background
-        UIManager.put("Panel.foreground", Color.WHITE);               // Panel text
-        UIManager.put("Label.foreground", Color.WHITE);               // Label text
-        UIManager.put("Button.background", new Color(50, 50, 50));    // Button background
-        UIManager.put("Button.foreground", Color.WHITE);              // Button text
-        UIManager.put("Button.focus", new Color(70, 70, 70));         // Button focus state
-        UIManager.put("TextField.background", new Color(50, 50, 50)); // Text field background
-        UIManager.put("TextField.foreground", Color.WHITE);           // Text field text
-        UIManager.put("TextField.caretForeground", Color.WHITE);      // Text field cursor
-        UIManager.put("ComboBox.background", new Color(50, 50, 50));  // Dropdown background
-        UIManager.put("ComboBox.foreground", Color.WHITE);            // Dropdown text
+        UIManager.put("Panel.background", new Color(24, 24, 24));     // Panel background
+        UIManager.put("Panel.foreground", new Color(240, 240, 240));  // Panel text
+        UIManager.put("Label.foreground", new Color(240, 240, 240));  // Label text
+        UIManager.put("Button.background", new Color(45, 45, 45));    // Button background
+        UIManager.put("Button.foreground", new Color(240, 240, 240)); // Button text
+        UIManager.put("Button.focus", new Color(60, 60, 60));         // Button focus state
+        UIManager.put("TextField.background", new Color(35, 35, 35)); // Text field background
+        UIManager.put("TextField.foreground", new Color(240, 240, 240)); // Text field text
+        UIManager.put("TextField.caretForeground", new Color(240, 240, 240)); // Text field cursor
+        UIManager.put("ComboBox.background", new Color(35, 35, 35));  // Dropdown background
+        UIManager.put("ComboBox.foreground", new Color(240, 240, 240)); // Dropdown text
+        
+        // Style JOptionPane for better readability
+        UIManager.put("OptionPane.background", new Color(24, 24, 24));
+        UIManager.put("OptionPane.messageForeground", new Color(240, 240, 240));
+        UIManager.put("OptionPane.messageFont", new Font("Segoe UI", Font.PLAIN, 14));
     }
 
     /**
@@ -72,13 +77,13 @@ public class BankAccountGUI extends JFrame {
         JButton searchByNameButton = createStyledButton("Search account by name");
         JButton exitButton = createStyledButton("Exit");
 
-        // Apply custom hover effects to each button with different colors
-        styleButton(createAccountButton, new Color(75, 110, 175));    // Blue shade
-        styleButton(depositButton, new Color(75, 145, 80));          // Green shade
-        styleButton(withdrawButton, new Color(175, 75, 75));         // Red shade
-        styleButton(displayInfoButton, new Color(100, 80, 155));     // Purple shade
-        styleButton(searchByNameButton, new Color(155, 100, 80));    // Brown shade
-        styleButton(exitButton, new Color(120, 120, 120));          // Gray shade
+        // Apply custom hover effects to each button with vibrant colors
+        styleButton(createAccountButton, new Color(88, 101, 242));    // Discord Blue
+        styleButton(depositButton, new Color(87, 242, 135));          // Vibrant Green
+        styleButton(withdrawButton, new Color(237, 66, 69));          // Vibrant Red
+        styleButton(displayInfoButton, new Color(156, 89, 242));      // Vibrant Purple
+        styleButton(searchByNameButton, new Color(242, 156, 89));     // Vibrant Orange
+        styleButton(exitButton, new Color(114, 137, 218));           // Light Discord Blue
 
         // Add action listeners to handle button clicks
         createAccountButton.addActionListener(new ActionListener() {
@@ -136,9 +141,12 @@ public class BankAccountGUI extends JFrame {
      */
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
-        button.setFocusPainted(false);                          // Remove focus border
-        button.setFont(new Font("Segoe UI", Font.BOLD, 14));   // Set custom font
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR));       // Change cursor on hover
+        button.setFocusPainted(false);
+        button.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        button.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
+        button.setBackground(new Color(45, 45, 45));
+        button.setForeground(new Color(240, 240, 240));
         return button;
     }
 
@@ -149,14 +157,16 @@ public class BankAccountGUI extends JFrame {
      */
     private void styleButton(JButton button, Color hoverColor) {
         button.addMouseListener(new java.awt.event.MouseAdapter() {
-            // Change color when mouse enters button area
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 button.setBackground(hoverColor);
+                button.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createLineBorder(hoverColor.brighter(), 1),
+                    BorderFactory.createEmptyBorder(9, 14, 9, 14)));
             }
 
-            // Restore original color when mouse exits button area
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(50, 50, 50));
+                button.setBackground(new Color(45, 45, 45));
+                button.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
             }
         });
     }
@@ -331,6 +341,11 @@ public class BankAccountGUI extends JFrame {
     public static void main(String[] args) {
         // Ensure GUI is created on the Event Dispatch Thread
         SwingUtilities.invokeLater(() -> {
+            try {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             BankAccountGUI gui = new BankAccountGUI();
             gui.setVisible(true);  // Make the GUI visible
         });

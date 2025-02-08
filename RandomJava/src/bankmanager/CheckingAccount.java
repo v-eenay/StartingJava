@@ -30,7 +30,7 @@ public class CheckingAccount extends BankAccount {
         }
 
         balance -= amount;
-        System.out.println("Withdrawn $" + amount + " from the account.");
+        System.out.println("Withdrawn Rs. " + amount + " from the account.");
     }
 
     /**

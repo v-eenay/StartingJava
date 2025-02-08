@@ -18,14 +18,14 @@ public class MovieGuess {
             boolean keepRunning = true;
 
             while (keepRunning) {
-                System.out.println("\n+---------------------------------------------+");
-                System.out.println("|                 Main Menu                   |");
-                System.out.println("+---------------------------------------------+");
-                System.out.println("| 1. Play the game (Test your cinematic IQ!)  |");
-                System.out.println("| 2. See the list of movies (Spoilers-free!)  |");
+                System.out.println("\n+----------------------------------------------+");
+                System.out.println("|                 Main Menu                      |");
+                System.out.println("+------------------------------------------------+");
+                System.out.println("| 1. Play the game (Test your cinematic IQ!)     |");
+                System.out.println("| 2. See the list of movies (Spoilers-free!)     |");
                 System.out.println("| 3. See high scores (Who's the real cinephile?) |");
-                System.out.println("| 4. Exit (Leaving so soon? We'll miss you!)  |");
-                System.out.println("+---------------------------------------------+");
+                System.out.println("| 4. Exit (Leaving so soon? We'll miss you!)     |");
+                System.out.println("+------------------------------------------------+");
                 System.out.print("Enter your choice (1-4): ");
 
                 int choice = Utils.getIntInput(userInput);

@@ -6,3 +6,5 @@ Vinay: 10 guesses
 Vinay: 9 guesses
 1: 5 guesses
 1: 14 guesses
+Delish: 14 guesses
+Vinay: 10 guesses
